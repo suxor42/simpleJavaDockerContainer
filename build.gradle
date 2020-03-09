@@ -1,0 +1,26 @@
+plugins {
+    id 'java'
+    id 'com.github.johnrengelman.shadow' version '5.2.0'
+}
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}
+
+shadowJar {
+    mergeServiceFiles() // Merges the files of the 'META-INF' services directory of all the Jar files
+    manifest.attributes (
+            'Main-Class': 'org.example.EchoArgs.Main',
+            "Application-Name": "Simple argument echo",
+            "Application-Version": project.version
+    )
+}
